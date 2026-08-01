@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>訂單</title>
+<style>
+	table{
+		width:100%;
+		border-collapse:collapse;
+	}
+	th,
+	td {
+		padding:12px;
+		text-align:center;
+		border: 1px solid #b0bec5;
+	
+	}
+	th{
+		color:white;
+		background-color: #1976d2;		
+	}
+	/*偶數變色*/
+	tr:nth-child(even){
+		background-color: #e3f2fd;	
+	}
+	/*滑鼠移動到變色*/
+	tbody tr:hover{
+		background-color:#fff9c4;
+	}
+
+</style>
+
+</head>
+<body>
+	<h1>我的訂單</h1>
+	<table border="1">
+		<caption>訂單內容</caption>
+		<thead>
+			<tr>
+				<th>名稱</th>
+				<th>金額</th>
+				<th>時間</th>
+			</tr>		
+		</thead>
+		<tbody>
+		<!--S-->
+		<tr>
+			<td>蘋果</td>
+			<td>50x2</td>
+			<td>19:00-20:00</td>
+		</tr>
+		
+		<tr>
+			<td>香蕉</td>
+			<td>20x3</td>
+			<td>19:00-20:00</td>
+		</tr>
+		
+		<tr>
+			<td>奇異果</td>
+			<td>30x6</td>
+			<td>19:00-20:00</td>
+		</tr>
+		<!--E-->
+		</tbody>	
+	
+	</table>
+</body>
+</html>

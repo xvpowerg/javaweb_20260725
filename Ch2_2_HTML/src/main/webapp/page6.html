@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表單</title>
+</head>
+<body>
+	<form>
+			<p>	
+				<label for="name">姓名</label>
+				<input type="text" id="name" name="name" placeholder="請輸入姓名" required>
+			</p>
+			
+			<p>
+				<label for="email">電子郵件</label>
+				<input type="email" id="email" name="email" required>
+			</p>
+			
+			<p>	
+				<label for="name">密碼</label>
+				<input type="password" id="pass" name="pass" placeholder="請輸入姓名" required>
+			</p>
+			<p>
+				性別:
+				<label><input type="radio" name="gender" value="male">男</label>
+				<label><input type="radio" name="gender" value="female">女</label>
+			</p>
+			<p>
+				喜歡的技術:
+				<label><input type="checkbox" name="skill" value="html">HTML</label>
+				<label><input type="checkbox" name='skill' value='css'>CSS</label>
+			</p>
+			
+			<p>
+				<select name="course">
+					<option value="html">HTML</option>
+					<option value="css">CSS</option>
+					<option value="javascript">JavaScript</option>
+				</select>
+			</p>
+			
+			<p>
+				<label>留言</label>
+				<textarea name="message" row="5" cols="40"></textarea>			
+			</p>
+		<button type="submit">送出</button>
+		<button type="reset">清除</button>
+	</form>
+</body>
+</html>

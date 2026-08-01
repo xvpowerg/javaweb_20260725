@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260">
+<rect width="400" height="260" fill="#e3f2fd"/>
+<path d="M125 94 L145 45 L178 82 Q200 72 222 82 L255 45 L275 94 Q300 120 290 165 Q280 215 200 220 Q120 215 110 165 Q100 120 125 94" fill="#ffcc80" stroke="#6d4c41" stroke-width="7"/>
+<circle cx="165" cy="130" r="8" fill="#263238"/><circle cx="235" cy="130" r="8" fill="#263238"/>
+<path d="M190 153 Q200 163 210 153" fill="none" stroke="#6d4c41" stroke-width="5" stroke-linecap="round"/>
+<path d="M145 155 L90 145 M145 168 L88 175 M255 155 L310 145 M255 168 L312 175" stroke="#6d4c41" stroke-width="4" stroke-linecap="round"/>
+<text x="200" y="245" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#37474f">images/cat.jpg 圖片位置示意</text>
+</svg>
