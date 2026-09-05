@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+	function getNumber(){
+		let msg = document.getElementById("msg")
+		msg.innerText = "等待中....."
+		console.log("Hello~");
+		fetch("page1",{method:"get"}).
+		then(resp=>{return resp.text();}).
+		then(text=>{msg.innerText = text;});
+		
+		
+	}
+
+</script>
+</head>
+<body>
+<button type="button" onclick="getNumber()">產生數字</button>
+<div id="msg"></div>
+
+</body>
+</html>

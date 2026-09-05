@@ -1,19 +1,543 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Future Shop｜科技購物商城</title>
+
+    <style>
+        /* 清除瀏覽器預設間距 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            color: #eafcff;
+
+            /* 科技感漸層背景 */
+            background:
+                radial-gradient(circle at top left, #123d5a 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #182855 0%, transparent 35%),
+                #07111f;
+        }
+
+        /* 上方導覽列 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 8%;
+            background-color: rgba(5, 17, 31, 0.9);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.08);
+        }
+
+        /* 網站名稱 */
+        .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        /* 上方選單 */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: #b8cbd8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+        }
+
+        /* 登入按鈕 */
+        .nav-links .login-button {
+            padding: 10px 22px;
+            color: #07111f;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00e5ff, #52ffa8);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .nav-links .login-button:hover {
+            color: #07111f;
+            text-shadow: none;
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(0, 229, 255, 0.45);
+        }
+
+        /* 首頁主要介紹區域 */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            gap: 50px;
+            width: 90%;
+            max-width: 1200px;
+            min-height: 500px;
+            margin: auto;
+            padding: 70px 0;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 18px;
+            color: #52ffa8;
+            font-size: 14px;
+            background-color: rgba(82, 255, 168, 0.1);
+            border: 1px solid rgba(82, 255, 168, 0.4);
+            border-radius: 20px;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 25px;
+            font-size: 52px;
+            line-height: 1.25;
+        }
+
+        .hero-content h1 span {
+            color: #00e5ff;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+        }
+
+        .hero-content p {
+            max-width: 600px;
+            margin-bottom: 35px;
+            color: #9db2c0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* 首頁按鈕區域 */
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 28px;
+            color: #07111f;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(135deg, #00e5ff, #52ffa8);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 24px rgba(0, 229, 255, 0.45);
+        }
+
+        .secondary-button {
+            color: #00e5ff;
+            background: transparent;
+            border: 1px solid #00e5ff;
+        }
+
+        /* 右側科技圖案 */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 360px;
+        }
+
+        .tech-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 290px;
+            height: 290px;
+            font-size: 100px;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 229, 255, 0.18),
+                rgba(82, 255, 168, 0.08)
+            );
+            border: 1px solid rgba(0, 229, 255, 0.5);
+            border-radius: 50%;
+            box-shadow:
+                0 0 35px rgba(0, 229, 255, 0.18),
+                inset 0 0 35px rgba(0, 229, 255, 0.1);
+        }
+
+        .circle-line {
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border: 1px dashed rgba(82, 255, 168, 0.35);
+            border-radius: 50%;
+        }
+
+        /* 功能選單區域 */
+        .service-section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0 80px;
+        }
+
+        .section-header {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            margin-bottom: 12px;
+            font-size: 32px;
+        }
+
+        .section-header h2 span {
+            color: #00e5ff;
+        }
+
+        .section-header p {
+            color: #91a9ba;
+        }
+
+        /* 功能卡片排列 */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        /* 功能卡片 */
+        .service-card {
+            padding: 30px 25px;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(10, 28, 47, 0.9);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: #00e5ff;
+            transform: translateY(-8px);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(0, 229, 255, 0.12);
+        }
+
+        .service-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 65px;
+            height: 65px;
+            margin-bottom: 22px;
+            font-size: 30px;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 229, 255, 0.18),
+                rgba(82, 255, 168, 0.1)
+            );
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 14px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-size: 21px;
+        }
+
+        .service-card p {
+            margin-bottom: 22px;
+            color: #8fa5b4;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .service-link {
+            color: #52ffa8;
+            font-size: 14px;
+        }
+
+        /* 頁尾版權區域 */
+        footer {
+            padding: 28px;
+            color: #647d8d;
+            text-align: center;
+            font-size: 13px;
+            background-color: rgba(5, 17, 31, 0.8);
+            border-top: 1px solid rgba(0, 229, 255, 0.15);
+        }
+
+        /* 平板版 */
+        @media (max-width: 950px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                height: 320px;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 手機版 */
+        @media (max-width: 650px) {
+            .navbar {
+                display: block;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-visual {
+                height: 260px;
+            }
+
+            .tech-circle {
+                width: 210px;
+                height: 210px;
+                font-size: 75px;
+            }
+
+            .circle-line {
+                width: 250px;
+                height: 250px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-		<a href="p2/login.html">登入</a>
-		<a href="p2/p2_1.html">廣告</a>
-		<a href="p2/p2_2.html">版權</a>
-		<a href="p1/p1_1.html">客戶資料</a>
-		<a href="p1/p1_2.html">訂單</a>
-		<!-- 
-		作業1 使用GPT 讓我的HTML美觀
-		作業2 登入成功導回首頁
-		
-		 -->
+
+    <!-- 上方導覽列 -->
+    <header class="navbar">
+
+        <div class="logo">
+            FUTURE<span>SHOP</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="p2/p2_1.html">廣告專區</a>
+            <a href="p1/p1_1.html">客戶資料</a>
+            <a href="p1/p1_2.html">我的訂單</a>
+            <a href="p2/login.html" class="login-button">會員登入</a>
+        </nav>
+
+    </header>
+
+    <!-- 首頁介紹 -->
+    <main>
+
+        <section class="hero">
+
+            <!-- 左側文字 -->
+            <div class="hero-content">
+
+                <span class="hero-tag">
+                    SMART TECHNOLOGY SHOP
+                </span>
+
+                <h1>
+                    探索未來<br>
+                    開啟你的<span>科技生活</span>
+                </h1>
+
+                <p>
+                    歡迎來到 Future Shop。
+                    您可以在這裡查看最新活動、管理客戶資料，
+                    並隨時掌握自己的訂單狀態。
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="p2/login.html" class="button">
+                        立即登入
+                    </a>
+
+                    <a href="#services" class="button secondary-button">
+                        查看網站功能
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- 右側圖案 -->
+            <div class="hero-visual">
+                <div class="circle-line"></div>
+                <div class="tech-circle">🛒</div>
+            </div>
+
+        </section>
+
+        <!-- 功能卡片區域 -->
+        <section class="service-section" id="services">
+
+            <div class="section-header">
+                <h2>網站<span>功能</span></h2>
+                <p>選擇您想要使用的服務</p>
+            </div>
+
+            <div class="service-grid">
+
+                <!-- 登入 -->
+                <a href="p2/login.html" class="service-card">
+
+                    <div class="service-icon">🔐</div>
+
+                    <h3>會員登入</h3>
+
+                    <p>
+                        登入您的會員帳號，使用完整的會員服務。
+                    </p>
+
+                    <span class="service-link">
+                        前往登入 →
+                    </span>
+
+                </a>
+
+                <!-- 廣告 -->
+                <a href="p2/p2_1.html" class="service-card">
+
+                    <div class="service-icon">📢</div>
+
+                    <h3>廣告專區</h3>
+
+                    <p>
+                        查看商城最新商品、優惠活動與熱門消息。
+                    </p>
+
+                    <span class="service-link">
+                        查看廣告 →
+                    </span>
+
+                </a>
+
+                <!-- 客戶資料 -->
+                <a href="p1/p1_1.html" class="service-card">
+
+                    <div class="service-icon">👤</div>
+
+                    <h3>客戶資料</h3>
+
+                    <p>
+                        查看會員基本資料、聯絡方式與消費統計。
+                    </p>
+
+                    <span class="service-link">
+                        查看資料 →
+                    </span>
+
+                </a>
+
+                <!-- 訂單 -->
+                <a href="p1/p1_2.html" class="service-card">
+
+                    <div class="service-icon">📦</div>
+
+                    <h3>我的訂單</h3>
+
+                    <p>
+                        查看購買商品、付款金額以及配送進度。
+                    </p>
+
+                    <span class="service-link">
+                        查看訂單 →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- 版權資訊 -->
+    <footer>
+        <p>
+            © 2026 Future Shop 電商平台．保留所有權利
+        </p>
+
+        <p>
+            <a href="p2/p2_2.html"
+               style="color: #00e5ff; text-decoration: none;">
+                查看版權說明
+            </a>
+        </p>
+    </footer>
+
+    <!--
+        作業1：使用 GPT 讓 HTML 更美觀
+        作業2：登入成功後導回首頁
+    -->
+
 </body>
+
 </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function loginFunc(){
+		let accValue = document.getElementById("accId").value;
+		let pwdValue = document.getElementById("pwdId").value;
+		let msg = document.getElementById("msg");
+		//console.log(accValue+":"+pwdValue);
+		fetch("login",
+			{method:"POST",
+			headers:{
+				"Content-Type":"application/x-www-form-urlencoded"
+				},
+			body:`acc=${accValue}&pwd=${pwdValue}`		
+					
+			}).then(resp=>{
+				return resp.text();
+				
+			}).then(text=>{
+				if (text.indexOf("Pass") != -1){
+					window.location.href="index.html";
+				}else{
+					msg.innerText = text;	
+				}
+							
+			})
+		
+	}
+
+</script>
+
+
+</head>
+<body>
+	
+	
+	<form action="login">
+		<input name="acc" id="accId">
+		<input name="pwd" id="pwdId" type="password">
+		<button type="button" onclick="loginFunc()"> 登入</button>
+	</form>
+	<div id="msg"></div>
+	
+</body>
+</html>

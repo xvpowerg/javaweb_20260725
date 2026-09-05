@@ -1,10 +1,600 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>訂單資料｜Future Shop</title>
+
+    <style>
+        /* 清除瀏覽器預設間距 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            color: #eafcff;
+
+            /* 科技感背景 */
+            background:
+                radial-gradient(circle at top left, #123d5a 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #182855 0%, transparent 35%),
+                #07111f;
+        }
+
+        /* 上方導覽列 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 8%;
+            background-color: rgba(5, 17, 31, 0.9);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.08);
+        }
+
+        /* 網站名稱 */
+        .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        /* 導覽列 */
+        .nav-links a {
+            margin-left: 28px;
+            color: #b8cbd8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+        }
+
+        /* 主要內容 */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        /* 頁面標題 */
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .page-header h1 span {
+            color: #00e5ff;
+        }
+
+        .page-header p {
+            color: #91a9ba;
+            line-height: 1.7;
+        }
+
+        /* 共用卡片樣式 */
+        .card {
+            margin-bottom: 25px;
+            padding: 30px;
+            background-color: rgba(10, 28, 47, 0.9);
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            border-radius: 16px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(0, 229, 255, 0.05);
+        }
+
+        /* 訂單上方資訊 */
+        .order-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .order-number h2 {
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .order-number p {
+            color: #91a9ba;
+            font-size: 14px;
+        }
+
+        /* 訂單狀態 */
+        .order-status {
+            display: inline-block;
+            padding: 9px 20px;
+            color: #52ffa8;
+            font-size: 14px;
+            background-color: rgba(82, 255, 168, 0.1);
+            border: 1px solid rgba(82, 255, 168, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 0 12px rgba(82, 255, 168, 0.1);
+        }
+
+        /* 區塊標題 */
+        .section-title {
+            margin-bottom: 25px;
+            padding-left: 12px;
+            color: #00e5ff;
+            font-size: 20px;
+            border-left: 4px solid #00e5ff;
+        }
+
+        /* 訂單表格 */
+        .table-area {
+            overflow-x: auto;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-table th {
+            padding: 15px;
+            color: #8fa9b9;
+            font-size: 14px;
+            text-align: left;
+            background-color: rgba(0, 229, 255, 0.06);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+        }
+
+        .order-table td {
+            padding: 18px 15px;
+            color: #eafcff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .order-table tr {
+            transition: 0.3s;
+        }
+
+        .order-table tbody tr:hover {
+            background-color: rgba(0, 229, 255, 0.04);
+        }
+
+        /* 商品資料 */
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 210px;
+        }
+
+        /* 商品圖示 */
+        .product-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            font-size: 28px;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 229, 255, 0.15),
+                rgba(82, 255, 168, 0.1)
+            );
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            border-radius: 10px;
+        }
+
+        .product-name {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .product-number {
+            color: #7891a2;
+            font-size: 12px;
+        }
+
+        /* 下方資料區域 */
+        .order-bottom {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 25px;
+        }
+
+        /* 收件人資料 */
+        .information-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .information-item {
+            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .information-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: #829aaa;
+            font-size: 13px;
+        }
+
+        .information-item p {
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* 地址占滿一整列 */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* 訂單金額 */
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            color: #a8bcc8;
+        }
+
+        .price-row span:last-child {
+            color: #ffffff;
+        }
+
+        .price-total {
+            margin-top: 10px;
+            padding-top: 20px;
+            font-size: 20px;
+            border-top: 1px solid rgba(0, 229, 255, 0.25);
+        }
+
+        .price-total strong {
+            color: #52ffa8;
+            font-size: 28px;
+        }
+
+        /* 按鈕區域 */
+        .button-area {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .button {
+            padding: 12px 25px;
+            color: #07111f;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(135deg, #00e5ff, #52ffa8);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(0, 229, 255, 0.45);
+        }
+
+        .secondary-button {
+            color: #00e5ff;
+            background: transparent;
+            border: 1px solid #00e5ff;
+        }
+
+        .danger-button {
+            color: #ff7188;
+            background: transparent;
+            border: 1px solid #ff7188;
+        }
+
+        .danger-button:hover {
+            box-shadow: 0 0 22px rgba(255, 113, 136, 0.35);
+        }
+
+        /* 頁尾 */
+        footer {
+            padding: 25px;
+            color: #647d8d;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* 手機版畫面 */
+        @media (max-width: 768px) {
+            .navbar {
+                display: block;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 18px;
+            }
+
+            .nav-links a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+
+            .order-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .order-bottom {
+                grid-template-columns: 1fr;
+            }
+
+            .information-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .button-area {
+                flex-direction: column;
+            }
+
+            .button {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<h1>訂單</h1>
+
+    <!-- 上方導覽列 -->
+    <header class="navbar">
+
+        <div class="logo">
+            FUTURE<span>SHOP</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">首頁</a>
+            <a href="#">商品</a>
+            <a href="#">購物車</a>
+            <a href="#" class="active">我的訂單</a>
+            <a href="#">會員中心</a>
+        </nav>
+
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="container">
+
+        <!-- 頁面標題 -->
+        <section class="page-header">
+            <h1>訂單<span>資料</span></h1>
+            <p>查看訂單內容、商品數量、付款金額與配送狀態。</p>
+        </section>
+
+        <!-- 訂單編號與狀態 -->
+        <section class="card order-header">
+
+            <div class="order-number">
+                <h2>訂單編號：ORD20260905001</h2>
+                <p>訂購時間：2026 年 9 月 5 日 09:30</p>
+            </div>
+
+            <div class="order-status">
+                商品配送中
+            </div>
+
+        </section>
+
+        <!-- 商品明細 -->
+        <section class="card">
+
+            <h2 class="section-title">商品明細</h2>
+
+            <div class="table-area">
+
+                <table class="order-table">
+
+                    <thead>
+                        <tr>
+                            <th>商品</th>
+                            <th>單價</th>
+                            <th>數量</th>
+                            <th>小計</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <div class="product-image">💻</div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            Future Pro 筆記型電腦
+                                        </div>
+
+                                        <div class="product-number">
+                                            商品編號：P001
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>NT$25,000</td>
+                            <td>1</td>
+                            <td>NT$25,000</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <div class="product-image">⌨️</div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            RGB 機械式鍵盤
+                                        </div>
+
+                                        <div class="product-number">
+                                            商品編號：P002
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>NT$2,000</td>
+                            <td>1</td>
+                            <td>NT$2,000</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <div class="product-image">🖱️</div>
+
+                                    <div>
+                                        <div class="product-name">
+                                            無線電競滑鼠
+                                        </div>
+
+                                        <div class="product-number">
+                                            商品編號：P003
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>NT$1,200</td>
+                            <td>2</td>
+                            <td>NT$2,400</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- 收件資料與金額 -->
+        <div class="order-bottom">
+
+            <!-- 左側收件資料 -->
+            <section class="card">
+
+                <h2 class="section-title">收件資料</h2>
+
+                <div class="information-grid">
+
+                    <div class="information-item">
+                        <label>收件人</label>
+                        <p>王小明</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>聯絡電話</label>
+                        <p>0912-345-678</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>付款方式</label>
+                        <p>信用卡付款</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>配送方式</label>
+                        <p>宅配到府</p>
+                    </div>
+
+                    <div class="information-item full-width">
+                        <label>收件地址</label>
+                        <p>高雄市左營區科技路 100 號</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- 右側金額資料 -->
+            <section class="card">
+
+                <h2 class="section-title">訂單金額</h2>
+
+                <div class="price-row">
+                    <span>商品總額</span>
+                    <span>NT$29,400</span>
+                </div>
+
+                <div class="price-row">
+                    <span>運費</span>
+                    <span>NT$100</span>
+                </div>
+
+                <div class="price-row">
+                    <span>會員折扣</span>
+                    <span>- NT$500</span>
+                </div>
+
+                <div class="price-row price-total">
+                    <span>付款總額</span>
+                    <strong>NT$29,000</strong>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- 操作按鈕 -->
+        <div class="button-area">
+
+            <a href="#" class="button danger-button">
+                取消訂單
+            </a>
+
+            <a href="#" class="button secondary-button">
+                返回訂單列表
+            </a>
+
+            <a href="#" class="button">
+                再次購買
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer>
+        © 2026 Future Shop 電商平台
+    </footer>
+
 </body>
+
 </html>

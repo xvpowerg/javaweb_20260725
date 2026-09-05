@@ -1,10 +1,435 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>客戶資料｜Future Shop</title>
+
+    <style>
+        /* 清除瀏覽器預設的間距 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, "Microsoft JhengHei", sans-serif;
+            color: #eafcff;
+
+            /* 科技感漸層背景 */
+            background:
+                radial-gradient(circle at top left, #123d5a 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #182855 0%, transparent 35%),
+                #07111f;
+        }
+
+        /* 上方導覽列 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 8%;
+            background-color: rgba(5, 17, 31, 0.85);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.08);
+        }
+
+        /* 網站名稱 */
+        .logo {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        /* 導覽列超連結 */
+        .nav-links a {
+            margin-left: 28px;
+            color: #b8cbd8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        /* 滑鼠移到超連結時 */
+        .nav-links a:hover {
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+        }
+
+        /* 主要內容區域 */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        /* 標題區域 */
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .page-header h1 span {
+            color: #00e5ff;
+        }
+
+        .page-header p {
+            color: #91a9ba;
+            line-height: 1.7;
+        }
+
+        /* 客戶資料卡片 */
+        .customer-card {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            overflow: hidden;
+            background-color: rgba(10, 28, 47, 0.9);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 18px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.35),
+                0 0 25px rgba(0, 229, 255, 0.06);
+        }
+
+        /* 左側會員資料 */
+        .customer-summary {
+            padding: 40px 25px;
+            text-align: center;
+            background: linear-gradient(
+                160deg,
+                rgba(0, 229, 255, 0.16),
+                rgba(13, 26, 50, 0.9)
+            );
+            border-right: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        /* 圓形會員圖示 */
+        .avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px;
+            color: #03131b;
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00e5ff, #52ffa8);
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.45);
+        }
+
+        .customer-summary h2 {
+            margin-bottom: 8px;
+        }
+
+        .customer-number {
+            color: #93adbd;
+            font-size: 14px;
+        }
+
+        /* 會員標籤 */
+        .member-level {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 7px 18px;
+            color: #52ffa8;
+            font-size: 14px;
+            background-color: rgba(82, 255, 168, 0.1);
+            border: 1px solid rgba(82, 255, 168, 0.45);
+            border-radius: 20px;
+        }
+
+        /* 右側詳細資料 */
+        .customer-details {
+            padding: 40px;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+            padding-left: 12px;
+            color: #00e5ff;
+            font-size: 20px;
+            border-left: 4px solid #00e5ff;
+        }
+
+        /* 資料欄位排列 */
+        .information-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .information-item {
+            padding: 18px;
+            background-color: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .information-item:hover {
+            border-color: rgba(0, 229, 255, 0.55);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 229, 255, 0.08);
+        }
+
+        .information-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: #829aaa;
+            font-size: 13px;
+        }
+
+        .information-item p {
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        /* 地址占滿一整列 */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* 消費統計 */
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            padding: 20px 10px;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 229, 255, 0.1),
+                rgba(82, 255, 168, 0.05)
+            );
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .stat-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #52ffa8;
+            font-size: 25px;
+        }
+
+        .stat-box span {
+            color: #9bb0bd;
+            font-size: 13px;
+        }
+
+        /* 按鈕區域 */
+        .button-area {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .button {
+            padding: 12px 25px;
+            color: #07111f;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            background: linear-gradient(135deg, #00e5ff, #52ffa8);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 22px rgba(0, 229, 255, 0.45);
+        }
+
+        .secondary-button {
+            color: #00e5ff;
+            background: transparent;
+            border: 1px solid #00e5ff;
+        }
+
+        /* 頁尾 */
+        footer {
+            padding: 25px;
+            color: #647d8d;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* 手機版畫面調整 */
+        @media (max-width: 768px) {
+            .navbar {
+                display: block;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 18px;
+            }
+
+            .nav-links a {
+                margin: 0 10px;
+            }
+
+            .customer-card {
+                grid-template-columns: 1fr;
+            }
+
+            .customer-summary {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+            }
+
+            .information-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .statistics {
+                grid-template-columns: 1fr;
+            }
+
+            .button-area {
+                flex-direction: column;
+            }
+
+            .button {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-	<h1>客戶資料</h1>
+
+    <!-- 上方導覽列 -->
+    <header class="navbar">
+        <div class="logo">
+            FUTURE<span>SHOP</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">首頁</a>
+            <a href="#">商品</a>
+            <a href="#">購物車</a>
+            <a href="#">會員中心</a>
+        </nav>
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="container">
+
+        <section class="page-header">
+            <h1>客戶<span>資料</span></h1>
+            <p>查看會員基本資料、訂單紀錄與消費統計。</p>
+        </section>
+
+        <section class="customer-card">
+
+            <!-- 左側會員摘要 -->
+            <div class="customer-summary">
+                <div class="avatar">王</div>
+
+                <h2>王小明</h2>
+                <p class="customer-number">會員編號：C00001</p>
+
+                <span class="member-level">科技白金會員</span>
+            </div>
+
+            <!-- 右側詳細資料 -->
+            <div class="customer-details">
+
+                <h3 class="section-title">基本資料</h3>
+
+                <div class="information-grid">
+
+                    <div class="information-item">
+                        <label>客戶姓名</label>
+                        <p>王小明</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>電話號碼</label>
+                        <p>0912-345-678</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>電子郵件</label>
+                        <p>xiaoming@example.com</p>
+                    </div>
+
+                    <div class="information-item">
+                        <label>加入日期</label>
+                        <p>2026 年 8 月 20 日</p>
+                    </div>
+
+                    <div class="information-item full-width">
+                        <label>收件地址</label>
+                        <p>高雄市左營區科技路 100 號</p>
+                    </div>
+
+                </div>
+
+                <!-- 消費統計 -->
+                <div class="statistics">
+
+                    <div class="stat-box">
+                        <strong>18</strong>
+                        <span>累積訂單</span>
+                    </div>
+
+                    <div class="stat-box">
+                        <strong>$12,680</strong>
+                        <span>累積消費</span>
+                    </div>
+
+                    <div class="stat-box">
+                        <strong>1,280</strong>
+                        <span>會員點數</span>
+                    </div>
+
+                </div>
+
+                <!-- 操作按鈕 -->
+                <div class="button-area">
+                    <a class="button secondary-button" href="#">
+                        查看訂單
+                    </a>
+
+                    <a class="button" href="#">
+                        修改資料
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        © 2026 Future Shop 電商平台
+    </footer>
+
 </body>
 </html>

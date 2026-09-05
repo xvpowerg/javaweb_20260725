@@ -20,6 +20,7 @@ public class LoignServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		if (acc.equals("qwer") && pwd.equals("123456")) {
 			session.setAttribute("login", true);
+			resp.sendRedirect("index.html");
 		}else {
 			resp.sendRedirect("p2/login.html");
 		}
