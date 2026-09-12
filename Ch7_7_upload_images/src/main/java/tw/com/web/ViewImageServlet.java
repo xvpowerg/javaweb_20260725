@@ -24,17 +24,17 @@ public class ViewImageServlet extends HttpServlet {
 			map(p->p.getFileName().toString()).
 			collect(Collectors.toList());
 		PrintWriter out =  resp.getWriter();
-//		for(var data : imagesList) {
-//			out.println(data);
-//		}
+
 		//作業顯示資料夾的2張圖片
 		out.println("<html>");
 		out.println("<body>");
-		
-		out.println("<div>");
-		out.println("<img width='30%' height='30%' src=/myimages/Donut.png");
-		out.println("</div>");
-		
+		String imgStr = "<img width='30%%' height='30%%' src=/myimages/%s";
+		for(var data : imagesList) {			
+			out.println("<div>");
+			System.out.println(data);
+			out.println(String.format(imgStr, data));
+			out.println("</div>");
+		}		
 		out.println("</body>");
 		out.println("<html>");
 		
