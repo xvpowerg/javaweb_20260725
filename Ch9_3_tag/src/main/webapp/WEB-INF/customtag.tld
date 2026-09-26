@@ -35,5 +35,34 @@
    		</attribute>			
    </tag>	
   
+   <tag>
+   		<description>myBodyTagSupport</description>
+   		<name>stringToUpper</name>
+   		<tag-class>tw.com.tag.MyBodyTagSupport</tag-class>
+   		<body-content>JSP</body-content>
+   </tag>
    
+   <tag>
+   		<description>DisplayImage</description>
+   		<name>img</name>
+   		<tag-class>tw.com.tag.MySimpleTagHandler</tag-class>
+   		<body-content>empty</body-content>
+   		<attribute>
+   			<name>url</name>
+   			<required>true</required>
+   			<rtexprvalue>true</rtexprvalue>
+   		</attribute>
+   		<attribute>
+   				<name>showBoder</name>
+   				<required>false</required>	
+   				<rtexprvalue>false</rtexprvalue>
+   				<type>boolean</type>   		
+   		</attribute>
+   		<attribute>
+   				<name>showUrl</name>
+   				<required>false</required>
+   				<rtexprvalue>false</rtexprvalue>
+   				<type>boolean</type>
+   		</attribute>
+   </tag>
 </taglib>
