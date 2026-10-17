@@ -3,7 +3,14 @@ package tw.com.jpa;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
+@NamedQueries({
+	@NamedQuery(name="findMyUser",query="SELECT myUserObj FROM MyUser  myUserObj WHERE "+
+				"myUserObj.account = :account and myUserObj.password =:password")
+	
+})
 @Entity
 public class MyUser {
 	@Id
@@ -29,5 +36,11 @@ public class MyUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Override
+	public String toString() {
+		return "MyUser [id=" + id + ", account=" + account + ", password=" + password + "]";
+	}
+	
+	
 	
 }
